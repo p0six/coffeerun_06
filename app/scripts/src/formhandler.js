@@ -14,18 +14,18 @@ export default class FormHandler {
 
   addSubmitHandler(fn) {
     console.log('Setting submit handler for form');
-    this.$formElement.on('submit', function(event) {
+    this.$formElement.on('submit', (event) => {
       event.preventDefault();
       let data = {};
-      $(this).serializeArray().forEach((item) => {
+      $(this.$formElement).serializeArray().forEach((item) => {
         data[item.name] = item.value;
         console.log(item.name + ' is ' + item.value);
       });
       console.log(data);
       fn(data)
         .then(() => {
-          this.reset();
-          this.elements[0].focus();
+          this.$formElement[0].reset();
+          this.$formElement[0].elements[0].focus();
         });
     });
   }
